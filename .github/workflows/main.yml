@@ -1,0 +1,23 @@
+name: Run Python Exercise
+
+on:
+  workflow_dispatch:
+    inputs:
+      script_path:
+        description: 'Path to the Python file (e.g. exercise1.py)'
+        required: true
+        default: 'main.py'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Run the script
+        run: python "${{ github.event.inputs.script_path }}"
